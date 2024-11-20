@@ -13,9 +13,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Checkout Knative Operator Project
+        uses: actions/checkout@v4
+        with: 
+          path: operator
+          repository: patrickleet/knative-operator
+
       # Add your custom steps here
       - name: Rebase from upstream
         run: |
+          cd operator
           git remote add upstream git@github.com:knative/operator.git
           git fetch --all --tags
           git rebase upstream/main --rebase
