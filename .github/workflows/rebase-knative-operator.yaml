@@ -22,7 +22,7 @@ jobs:
       - name: Rebase from upstream
         run: |
           cd operator
-          git remote add upstream git@github.com:knative/operator.git
+          git remote add upstream https://github.com/knative/operator.git
           git fetch --all --tags
           git rebase upstream/main --autostash
           git push origin main --force
