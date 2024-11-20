@@ -5,7 +5,7 @@ on:
     - cron: "*/5 * * * *"
 
 jobs:
-  nightly-task:
+  rebase-knative-operator:
     runs-on: ubuntu-latest
 
     steps:
