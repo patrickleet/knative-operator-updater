@@ -1,0 +1,22 @@
+name: Nightly Rebase
+
+on:
+  schedule:
+    # Runs at 1:00 AM UTC daily
+    - cron: '0 1 * * *'
+
+jobs:
+  nightly-task:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Add your custom steps here
+      - name: Rebase from upstream
+        run: |
+          git remote add upstream git@github.com:knative/operator.git
+          git fetch --all --tags
+          git rebase upstream/main --rebase
+          git push origin main --force
