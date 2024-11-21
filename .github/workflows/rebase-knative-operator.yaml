@@ -4,24 +4,18 @@ on:
   schedule:
     - cron: "*/5 * * * *"
 
+permissions:
+  contents: write
+
 jobs:
   rebase-knative-operator:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Checkout Knative Operator Project
-        uses: actions/checkout@v4
-        with: 
-          path: operator
-          repository: patrickleet/knative-operator
-
-      # Add your custom steps here
       - name: Rebase from upstream
         run: |
-          cd operator
+          git clone https://github.com/patrickleet/knative-operator.git
+          cd knative-operator
           git remote add upstream https://github.com/knative/operator.git
           git fetch --all --tags
           git rebase upstream/main --autostash
